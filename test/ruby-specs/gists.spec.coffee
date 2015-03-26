@@ -109,6 +109,13 @@ define (require) ->
           expect(gist.owner.login).to.equal('jmccartie')
           done()
 
+      it "returns gist with raw_url", (done) ->
+        client.gists(790381).fetch()
+        .then (gist) ->
+          raw_url = gist.files['defleppard.rb'].raw_url
+          expect(raw_url).to.not.be.undefined
+          done()
+
       it "returns the user's starred gists", (done) ->
         client.gists.starred.fetch()
         .then(null,(e) -> console.error e)
